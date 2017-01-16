@@ -1,12 +1,12 @@
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
-		module.exports = factory(require("babel-register"), require("dotenv"), require("require-hacker"), require("css-modules-require-hook"), require("node-sass"), require("jsdom"), require("fs"), require("path"), require("Mocha"));
+		module.exports = factory(require("babel-register"), require("dotenv"), require("require-hacker"), require("css-modules-require-hook"), require("node-sass"), require("jsdom"), require("fs"), require("path"), require("mocha"));
 	else if(typeof define === 'function' && define.amd)
-		define("mocha-factory", ["babel-register", "dotenv", "require-hacker", "css-modules-require-hook", "node-sass", "jsdom", "fs", "path", "Mocha"], factory);
+		define("mocha-factory", ["babel-register", "dotenv", "require-hacker", "css-modules-require-hook", "node-sass", "jsdom", "fs", "path", "mocha"], factory);
 	else if(typeof exports === 'object')
-		exports["mocha-factory"] = factory(require("babel-register"), require("dotenv"), require("require-hacker"), require("css-modules-require-hook"), require("node-sass"), require("jsdom"), require("fs"), require("path"), require("Mocha"));
+		exports["mocha-factory"] = factory(require("babel-register"), require("dotenv"), require("require-hacker"), require("css-modules-require-hook"), require("node-sass"), require("jsdom"), require("fs"), require("path"), require("mocha"));
 	else
-		root["mocha-factory"] = factory(root["babel-register"], root["dotenv"], root["require-hacker"], root["css-modules-require-hook"], root["node-sass"], root["jsdom"], root["fs"], root["path"], root["Mocha"]);
+		root["mocha-factory"] = factory(root["babel-register"], root["dotenv"], root["require-hacker"], root["css-modules-require-hook"], root["node-sass"], root["jsdom"], root["fs"], root["path"], root["mocha"]);
 })(this, function(__WEBPACK_EXTERNAL_MODULE_2__, __WEBPACK_EXTERNAL_MODULE_3__, __WEBPACK_EXTERNAL_MODULE_4__, __WEBPACK_EXTERNAL_MODULE_5__, __WEBPACK_EXTERNAL_MODULE_6__, __WEBPACK_EXTERNAL_MODULE_7__, __WEBPACK_EXTERNAL_MODULE_8__, __WEBPACK_EXTERNAL_MODULE_9__, __WEBPACK_EXTERNAL_MODULE_10__) {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
