@@ -143,6 +143,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	var setup = exports.setup = function () {
 	  function setup(config) {
+	    if (!config.slackHook) return;
+	    // Remap the slackHook to url just made it slackHook so its more descriptive
 	    config.url = config.slackHook;
 	    mochaInstance.reporter('mocha-ci-slack-reporter', config);
 	  }
