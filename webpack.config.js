@@ -22,7 +22,7 @@ var config = {
     "jsdom" : 'jsdom',
     "fs" : 'fs',
     "path" : 'path',
-    "mocha" : 'Mocha'
+    "mocha" : 'mocha'
   },
   module : {
     loaders : [
