@@ -137,18 +137,18 @@ return /******/ (function(modules) { // webpackBootstrap
 	// Instantiate a Mocha instance.
 	var mochaInstance = new Mocha();
 	
-	// Integrate with Slack if available
-	if (process.env.SLACK_DEVELOPMENT_HOOK_URL) {
-	  mochaInstance.reporter('mocha-ci-slack-reporter', {
-	    testTitle: process.env.npm_package_name + ' - (' + process.env.NODE_ENV + ') - Unit tests',
-	    url: process.env.SLACK_DEVELOPMENT_HOOK_URL,
-	    username: 'Florey',
-	    channel: '#deployment'
-	  });
-	}
-	
 	// Run the tests.
 	var mocha = exports.mocha = mochaInstance;
+	
+	var setup = exports.setup = function () {
+	  function setup(config) {
+	    config.url = config.slackHook;
+	    config.testTitle = config.testTitle += ' - (' + process.env.NODE_ENV + ')';
+	    mochaInstance.reporter('mocha-ci-slack-reporter', config);
+	  }
+	
+	  return setup;
+	}();
 	
 	var run = exports.run = function () {
 	  function run() {
