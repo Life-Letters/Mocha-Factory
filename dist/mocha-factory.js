@@ -139,28 +139,18 @@ return /******/ (function(modules) { // webpackBootstrap
 	// Run the tests.
 	var mocha = exports.mocha = mochaInstance;
 	
+	// Basically just sets up reporter for now
+	
 	var setup = exports.setup = function () {
 	  function setup(config) {
 	    config.url = config.slackHook;
-	    config.testTitle = config.testTitle += ' - (' + process.env.NODE_ENV + ')';
 	    mochaInstance.reporter('mocha-ci-slack-reporter', config);
 	  }
 	
 	  return setup;
 	}();
 	
-	var run = exports.run = function () {
-	  function run() {
-	    mochaInstance.growl().run(function (failures) {
-	      process.on('exit', function () {
-	        process.exit(failures); // exit with non-zero status if there were failures
-	      });
-	    });
-	  }
-	
-	  return run;
-	}();
-	
+	// Adds Mocha suites
 	var addFiles = exports.addFiles = function () {
 	  function addFiles(dir, ext) {
 	    // Add each .js file to the mocha instance
@@ -173,6 +163,19 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }
 	
 	  return addFiles;
+	}();
+	
+	// Runs the tests
+	var run = exports.run = function () {
+	  function run() {
+	    mochaInstance.growl().run(function (failures) {
+	      process.on('exit', function () {
+	        process.exit(failures); // exit with non-zero status if there were failures
+	      });
+	    });
+	  }
+	
+	  return run;
 	}();
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }()), __webpack_require__(1)))
 

@@ -29,7 +29,7 @@ MochaFactory.mocha.afterAll( function() {
 // Setup the instance
 MochaFactory.setup({
   testTitle : `Sample-Project - Unit tests`,
-  slackHook : process.env.SLACK_DEVELOPMENT_HOOK_URL,
+  slackHook : process.env.SLACK_DEVELOPMENT_HOOK_URL, <-- you can use envs to make life easier
   username: 'Florey',
   channel: '#deployment'
 });
