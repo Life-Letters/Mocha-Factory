@@ -1,0 +1,30 @@
+{
+  "name": "mocha-factory",
+  "version": "1.0.0",
+  "description": "A Mocha Instance generator that plays well with Florey testing pipelines",
+  "main": "lib/mocha-factory.js",
+  "engineStrict": true,
+  "engines": {
+    "node": ">=7.3.0"
+  },
+  "author": "Patrick Lai <Patrick.lai@lifeletters.com.au>",
+  "license": "MIT",
+  "devDependencies": {
+    "babel-core": "^6.21.0",
+    "babel-loader": "^6.2.10",
+    "babel-preset-airbnb": "^1.0.1",
+    "babel-preset-stage-0": "^6.16.0",
+    "babel-register": "^6.4.3",
+    "dotenv": "^4.0.0",
+    "webpack": "^1.13.1"
+  },
+  "dependencies": {
+    "css-modules-require-hook": "^4.0.5",
+    "jsdom": "^8.0.1",
+    "require-hacker": "^2.1.4",
+    "node-sass": "^3.10.0",
+    "mocha": "^2.4.5",
+    "growl": "^1.9.2",
+    "mocha-ci-slack-reporter": "^1.0.1"
+  }
+}
