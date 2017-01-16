@@ -26,6 +26,14 @@ MochaFactory.mocha.afterAll( function() {
   server.close();
 });
 
+// Setup the instance
+MochaFactory.setup({
+  testTitle : `Sample-Project - Unit tests`,
+  slackHook : process.env.SLACK_DEVELOPMENT_HOOK_URL,
+  username: 'Florey',
+  channel: '#deployment'
+});
+
 // Adds files with 2 params, Directory and 2nd is extension
 MochaFactory.addFiles('./test/Journey/JsTests','.js');
 
