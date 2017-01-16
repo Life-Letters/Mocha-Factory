@@ -15,7 +15,6 @@ var config = {
   },
   externals: {
     "babel-register": 'babel-register',
-    "dotenv" : 'dotenv',
     "require-hacker" : 'require-hacker',
     "css-modules-require-hook" : 'css-modules-require-hook',
     "node-sass" : 'node-sass',
