@@ -41,8 +41,13 @@ MochaFactory.addFiles('./test/Journey/JsTests','.js');
 MochaFactory.run();
 
 // Helper function for Html to js with selenium IDE tests
-const testList = MochaFactory.convertHtmlFileToJsFile(TEST_SCRIPTS_DIR,EXPORT_DIR);
+const testList = MochaFactory.convertHtmlFileToJsFile(TEST_SCRIPTS_DIR,EXPORT_DIR).map((f) => require(f));
 
+// Runing Selenium IDE tests , assumes you've converted them into runnable test functions by the 'convertHtmlToJsFile' methods
+MochaFactory.runIDEtests({
+  selenium_server_remote: process.env.SELENIUM_SERVER_REMOTE,
+  browser_name: 'chrome'
+}, testList, done);
 ```
 
 #### Notifications
