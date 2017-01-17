@@ -21,7 +21,8 @@ var config = {
     "jsdom" : 'jsdom',
     "fs" : 'fs',
     "path" : 'path',
-    "mocha" : 'mocha'
+    "mocha" : 'mocha',
+    "selenium-html-js-converter" : 'selenium-html-js-converter'
   },
   module : {
     loaders : [

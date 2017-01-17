@@ -40,6 +40,9 @@ MochaFactory.addFiles('./test/Journey/JsTests','.js');
 // Just runs your tests
 MochaFactory.run();
 
+// Helper function for Html to js with selenium IDE tests
+const testList = MochaFactory.convertHtmlFileToJsFile(TEST_SCRIPTS_DIR,EXPORT_DIR);
+
 ```
 
 #### Notifications

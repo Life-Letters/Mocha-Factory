@@ -1,13 +1,13 @@
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
-		module.exports = factory(require("babel-register"), require("require-hacker"), require("css-modules-require-hook"), require("node-sass"), require("jsdom"), require("fs"), require("path"), require("mocha"));
+		module.exports = factory(require("babel-register"), require("require-hacker"), require("css-modules-require-hook"), require("node-sass"), require("jsdom"), require("fs"), require("path"), require("selenium-html-js-converter"), require("mocha"));
 	else if(typeof define === 'function' && define.amd)
-		define("mocha-factory", ["babel-register", "require-hacker", "css-modules-require-hook", "node-sass", "jsdom", "fs", "path", "mocha"], factory);
+		define("mocha-factory", ["babel-register", "require-hacker", "css-modules-require-hook", "node-sass", "jsdom", "fs", "path", "selenium-html-js-converter", "mocha"], factory);
 	else if(typeof exports === 'object')
-		exports["mocha-factory"] = factory(require("babel-register"), require("require-hacker"), require("css-modules-require-hook"), require("node-sass"), require("jsdom"), require("fs"), require("path"), require("mocha"));
+		exports["mocha-factory"] = factory(require("babel-register"), require("require-hacker"), require("css-modules-require-hook"), require("node-sass"), require("jsdom"), require("fs"), require("path"), require("selenium-html-js-converter"), require("mocha"));
 	else
-		root["mocha-factory"] = factory(root["babel-register"], root["require-hacker"], root["css-modules-require-hook"], root["node-sass"], root["jsdom"], root["fs"], root["path"], root["mocha"]);
-})(this, function(__WEBPACK_EXTERNAL_MODULE_2__, __WEBPACK_EXTERNAL_MODULE_3__, __WEBPACK_EXTERNAL_MODULE_4__, __WEBPACK_EXTERNAL_MODULE_5__, __WEBPACK_EXTERNAL_MODULE_6__, __WEBPACK_EXTERNAL_MODULE_7__, __WEBPACK_EXTERNAL_MODULE_8__, __WEBPACK_EXTERNAL_MODULE_9__) {
+		root["mocha-factory"] = factory(root["babel-register"], root["require-hacker"], root["css-modules-require-hook"], root["node-sass"], root["jsdom"], root["fs"], root["path"], root["selenium-html-js-converter"], root["mocha"]);
+})(this, function(__WEBPACK_EXTERNAL_MODULE_2__, __WEBPACK_EXTERNAL_MODULE_3__, __WEBPACK_EXTERNAL_MODULE_4__, __WEBPACK_EXTERNAL_MODULE_5__, __WEBPACK_EXTERNAL_MODULE_6__, __WEBPACK_EXTERNAL_MODULE_7__, __WEBPACK_EXTERNAL_MODULE_8__, __WEBPACK_EXTERNAL_MODULE_9__, __WEBPACK_EXTERNAL_MODULE_10__) {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -68,7 +68,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	    jsdom = __webpack_require__(6).jsdom,
 	    fs = __webpack_require__(7),
 	    path = __webpack_require__(8),
-	    Mocha = __webpack_require__(9);
+	    converter = __webpack_require__(9),
+	    Mocha = __webpack_require__(10);
 	
 	// Dont bother with Static files
 	var ignoredExtensions = ['png', 'gif', 'jpg', 'jpeg', 'svg', 'm4a', 'mp3', 'wav', 'mp4'];
@@ -444,6 +445,12 @@ return /******/ (function(modules) { // webpackBootstrap
 /***/ function(module, exports) {
 
 	module.exports = __WEBPACK_EXTERNAL_MODULE_9__;
+
+/***/ },
+/* 10 */
+/***/ function(module, exports) {
+
+	module.exports = __WEBPACK_EXTERNAL_MODULE_10__;
 
 /***/ }
 /******/ ])
