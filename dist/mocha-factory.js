@@ -179,6 +179,36 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	  return run;
 	}();
+	
+	// Selenium HTML to js exporter
+	var convertHtmlFileToJsFile = exports.convertHtmlFileToJsFile = function () {
+	  function convertHtmlFileToJsFile(test_scripts_dir, exports_dir) {
+	
+	    // Store list of tests so we can return it;
+	    var list_of_tests = new Array();
+	
+	    // Convert your tests
+	    fs.readdir(test_scripts_dir, function (err, files) {
+	      files.forEach(function (file) {
+	        if (file.substr(-5) === '.html') {
+	
+	          // Convert the file and save it into exports folder
+	          console.log('converting', file);
+	          var output_fileName = exports_dir + '/' + file.split('.')[0] + '.js';
+	          converter.convertHtmlFileToJsFile(test_scripts_dir + '/' + file, output_fileName);
+	
+	          // Push it into exported array
+	          list_of_tests.push(output_fileName);
+	        }
+	      });
+	    });
+	
+	    // Give back the array of tests
+	    return list_of_tests;
+	  }
+	
+	  return convertHtmlFileToJsFile;
+	}();
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }()), __webpack_require__(1)))
 
 /***/ },
