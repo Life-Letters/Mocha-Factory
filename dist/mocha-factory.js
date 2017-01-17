@@ -1,13 +1,13 @@
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
-		module.exports = factory(require("babel-register"), require("require-hacker"), require("css-modules-require-hook"), require("node-sass"), require("jsdom"), require("fs"), require("path"), require("selenium-html-js-converter"), require("mocha"), require("wd-sync"), require("colors"));
+		module.exports = factory(require("babel-register"), require("require-hacker"), require("css-modules-require-hook"), require("node-sass"), require("jsdom"), require("fs"), require("path"), require("selenium-html-js-converter"), require("mocha"), require("wd-sync"), require("ping"), require("colors"));
 	else if(typeof define === 'function' && define.amd)
-		define("mocha-factory", ["babel-register", "require-hacker", "css-modules-require-hook", "node-sass", "jsdom", "fs", "path", "selenium-html-js-converter", "mocha", "wd-sync", "colors"], factory);
+		define("mocha-factory", ["babel-register", "require-hacker", "css-modules-require-hook", "node-sass", "jsdom", "fs", "path", "selenium-html-js-converter", "mocha", "wd-sync", "ping", "colors"], factory);
 	else if(typeof exports === 'object')
-		exports["mocha-factory"] = factory(require("babel-register"), require("require-hacker"), require("css-modules-require-hook"), require("node-sass"), require("jsdom"), require("fs"), require("path"), require("selenium-html-js-converter"), require("mocha"), require("wd-sync"), require("colors"));
+		exports["mocha-factory"] = factory(require("babel-register"), require("require-hacker"), require("css-modules-require-hook"), require("node-sass"), require("jsdom"), require("fs"), require("path"), require("selenium-html-js-converter"), require("mocha"), require("wd-sync"), require("ping"), require("colors"));
 	else
-		root["mocha-factory"] = factory(root["babel-register"], root["require-hacker"], root["css-modules-require-hook"], root["node-sass"], root["jsdom"], root["fs"], root["path"], root["selenium-html-js-converter"], root["mocha"], root["wd-sync"], root["colors"]);
-})(this, function(__WEBPACK_EXTERNAL_MODULE_2__, __WEBPACK_EXTERNAL_MODULE_3__, __WEBPACK_EXTERNAL_MODULE_4__, __WEBPACK_EXTERNAL_MODULE_5__, __WEBPACK_EXTERNAL_MODULE_6__, __WEBPACK_EXTERNAL_MODULE_7__, __WEBPACK_EXTERNAL_MODULE_8__, __WEBPACK_EXTERNAL_MODULE_9__, __WEBPACK_EXTERNAL_MODULE_10__, __WEBPACK_EXTERNAL_MODULE_11__, __WEBPACK_EXTERNAL_MODULE_12__) {
+		root["mocha-factory"] = factory(root["babel-register"], root["require-hacker"], root["css-modules-require-hook"], root["node-sass"], root["jsdom"], root["fs"], root["path"], root["selenium-html-js-converter"], root["mocha"], root["wd-sync"], root["ping"], root["colors"]);
+})(this, function(__WEBPACK_EXTERNAL_MODULE_2__, __WEBPACK_EXTERNAL_MODULE_3__, __WEBPACK_EXTERNAL_MODULE_4__, __WEBPACK_EXTERNAL_MODULE_5__, __WEBPACK_EXTERNAL_MODULE_6__, __WEBPACK_EXTERNAL_MODULE_7__, __WEBPACK_EXTERNAL_MODULE_8__, __WEBPACK_EXTERNAL_MODULE_9__, __WEBPACK_EXTERNAL_MODULE_10__, __WEBPACK_EXTERNAL_MODULE_11__, __WEBPACK_EXTERNAL_MODULE_12__, __WEBPACK_EXTERNAL_MODULE_13__) {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -71,7 +71,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	    converter = __webpack_require__(9),
 	    Mocha = __webpack_require__(10),
 	    wdSync = __webpack_require__(11),
-	    colors = __webpack_require__(12);
+	    ping = __webpack_require__(12),
+	    colors = __webpack_require__(13);
 	
 	// Dont bother with Static files
 	var ignoredExtensions = ['png', 'gif', 'jpg', 'jpeg', 'svg', 'm4a', 'mp3', 'wav', 'mp4'];
@@ -212,13 +213,22 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	// Expect config like this
 	// {
-	//  test_scripts_dir: xxxxx
-	//  exports_dir: xxxxx
 	//  selenium_server_remote: xxxxx
 	//  browser_name: xxxxx
 	// }
 	var runIDEtests = exports.runIDEtests = function () {
 	  function runIDEtests(config, list_of_test_functions, done) {
+	
+	    // Cheap way to check if there is even a host
+	    if (config.selenium_server_remote) {
+	      ping.sys.probe(config.selenium_server_remote, function (isAlive) {
+	        if (!isAlive) {
+	          console.log('selenium_server_remote ' + config.selenium_server_remote + ' cannot be reached');
+	          process.exit(1);
+	        }
+	      });
+	    }
+	
 	    var client = wdSync.remote(config.selenium_server_remote || undefined),
 	        browser = client.browser,
 	        sync = client.sync;
@@ -513,6 +523,12 @@ return /******/ (function(modules) { // webpackBootstrap
 /***/ function(module, exports) {
 
 	module.exports = __WEBPACK_EXTERNAL_MODULE_12__;
+
+/***/ },
+/* 13 */
+/***/ function(module, exports) {
+
+	module.exports = __WEBPACK_EXTERNAL_MODULE_13__;
 
 /***/ }
 /******/ ])

@@ -25,7 +25,8 @@ var config = {
     "selenium-html-js-converter" : 'selenium-html-js-converter',
     "colors" : 'colors/safe',
     "colors/safe" : 'colors',
-    "wd-sync" : 'wd-sync'
+    "wd-sync" : 'wd-sync',
+    "ping" : 'ping'
   },
   module : {
     loaders : [
