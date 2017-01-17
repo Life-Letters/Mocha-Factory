@@ -3,13 +3,7 @@ require('dotenv').config();
 
 var MochaFactory = require('./lib/mocha-factory.js');
 
-var testList = MochaFactory.convertHtmlFileToJsFile('./selenium','./selenium/export');
-
-var list_of_test_functions = new Array();
-
-for( test of testList ){
-  list_of_test_functions.push(require(test));
-};
+var testList = MochaFactory.convertHtmlFileToJsFile('./selenium','./selenium/export').map((f) => require(f));
 
 MochaFactory.runIDEtests({
   test_scripts_dir: './selenium',
@@ -17,7 +11,7 @@ MochaFactory.runIDEtests({
   selenium_server_remote: process.env.SELENIUM_SERVER_REMOTE,
   browser_name: 'chrome'
 },
-list_of_test_functions,
+testList,
 ()=>{
   console.log("Complete/Callback");
 });
