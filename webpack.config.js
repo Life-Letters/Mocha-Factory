@@ -22,7 +22,10 @@ var config = {
     "fs" : 'fs',
     "path" : 'path',
     "mocha" : 'mocha',
-    "selenium-html-js-converter" : 'selenium-html-js-converter'
+    "selenium-html-js-converter" : 'selenium-html-js-converter',
+    "colors" : 'colors/safe',
+    "colors/safe" : 'colors',
+    "wd-sync" : 'wd-sync'
   },
   module : {
     loaders : [

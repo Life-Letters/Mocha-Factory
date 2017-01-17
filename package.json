@@ -21,14 +21,16 @@
     "babel-register": "^6.4.3",
     "webpack": "^1.13.1"
   },
-  "dependencies":{
-    "mocha": "^2.4.5",
+  "dependencies": {
+    "colors": "^1.1.2",
+    "css-modules-require-hook": "^4.0.5",
     "growl": "^1.9.2",
-    "mocha-ci-slack-reporter": "^1.0.1",
     "jsdom": "^8.0.1",
+    "mocha": "^2.4.5",
+    "mocha-ci-slack-reporter": "^1.0.1",
     "node-sass": "^3.10.0",
     "require-hacker": "^2.1.4",
-    "css-modules-require-hook": "^4.0.5",
-    "selenium-html-js-converter": "^0.4.7"
+    "selenium-html-js-converter": "^0.4.7",
+    "wd-sync": "^1.2.5"
   }
 }

@@ -1,13 +1,13 @@
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
-		module.exports = factory(require("babel-register"), require("require-hacker"), require("css-modules-require-hook"), require("node-sass"), require("jsdom"), require("fs"), require("path"), require("selenium-html-js-converter"), require("mocha"));
+		module.exports = factory(require("babel-register"), require("require-hacker"), require("css-modules-require-hook"), require("node-sass"), require("jsdom"), require("fs"), require("path"), require("selenium-html-js-converter"), require("mocha"), require("wd-sync"), require("colors"));
 	else if(typeof define === 'function' && define.amd)
-		define("mocha-factory", ["babel-register", "require-hacker", "css-modules-require-hook", "node-sass", "jsdom", "fs", "path", "selenium-html-js-converter", "mocha"], factory);
+		define("mocha-factory", ["babel-register", "require-hacker", "css-modules-require-hook", "node-sass", "jsdom", "fs", "path", "selenium-html-js-converter", "mocha", "wd-sync", "colors"], factory);
 	else if(typeof exports === 'object')
-		exports["mocha-factory"] = factory(require("babel-register"), require("require-hacker"), require("css-modules-require-hook"), require("node-sass"), require("jsdom"), require("fs"), require("path"), require("selenium-html-js-converter"), require("mocha"));
+		exports["mocha-factory"] = factory(require("babel-register"), require("require-hacker"), require("css-modules-require-hook"), require("node-sass"), require("jsdom"), require("fs"), require("path"), require("selenium-html-js-converter"), require("mocha"), require("wd-sync"), require("colors"));
 	else
-		root["mocha-factory"] = factory(root["babel-register"], root["require-hacker"], root["css-modules-require-hook"], root["node-sass"], root["jsdom"], root["fs"], root["path"], root["selenium-html-js-converter"], root["mocha"]);
-})(this, function(__WEBPACK_EXTERNAL_MODULE_2__, __WEBPACK_EXTERNAL_MODULE_3__, __WEBPACK_EXTERNAL_MODULE_4__, __WEBPACK_EXTERNAL_MODULE_5__, __WEBPACK_EXTERNAL_MODULE_6__, __WEBPACK_EXTERNAL_MODULE_7__, __WEBPACK_EXTERNAL_MODULE_8__, __WEBPACK_EXTERNAL_MODULE_9__, __WEBPACK_EXTERNAL_MODULE_10__) {
+		root["mocha-factory"] = factory(root["babel-register"], root["require-hacker"], root["css-modules-require-hook"], root["node-sass"], root["jsdom"], root["fs"], root["path"], root["selenium-html-js-converter"], root["mocha"], root["wd-sync"], root["colors"]);
+})(this, function(__WEBPACK_EXTERNAL_MODULE_2__, __WEBPACK_EXTERNAL_MODULE_3__, __WEBPACK_EXTERNAL_MODULE_4__, __WEBPACK_EXTERNAL_MODULE_5__, __WEBPACK_EXTERNAL_MODULE_6__, __WEBPACK_EXTERNAL_MODULE_7__, __WEBPACK_EXTERNAL_MODULE_8__, __WEBPACK_EXTERNAL_MODULE_9__, __WEBPACK_EXTERNAL_MODULE_10__, __WEBPACK_EXTERNAL_MODULE_11__, __WEBPACK_EXTERNAL_MODULE_12__) {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -69,7 +69,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	    fs = __webpack_require__(7),
 	    path = __webpack_require__(8),
 	    converter = __webpack_require__(9),
-	    Mocha = __webpack_require__(10);
+	    Mocha = __webpack_require__(10),
+	    wdSync = __webpack_require__(11),
+	    colors = __webpack_require__(12);
 	
 	// Dont bother with Static files
 	var ignoredExtensions = ['png', 'gif', 'jpg', 'jpeg', 'svg', 'm4a', 'mp3', 'wav', 'mp4'];
@@ -206,6 +208,57 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }
 	
 	  return convertHtmlFileToJsFile;
+	}();
+	
+	// Expect config like this
+	// {
+	//  test_scripts_dir: xxxxx
+	//  exports_dir: xxxxx
+	//  selenium_server_remote: xxxxx
+	//  browser_name: xxxxx
+	// }
+	var runIDEtests = exports.runIDEtests = function () {
+	  function runIDEtests(config, list_of_test_functions, done) {
+	    var client = wdSync.remote(config.selenium_server_remote || undefined),
+	        browser = client.browser,
+	        sync = client.sync;
+	
+	    sync(function () {
+	      browser.init({ browserName: config.browser_name });
+	      var _iteratorNormalCompletion2 = true;
+	      var _didIteratorError2 = false;
+	      var _iteratorError2 = undefined;
+	
+	      try {
+	        for (var _iterator2 = list_of_test_functions[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+	          var test = _step2.value;
+	
+	          console.log('Test Begin : ' + test.name);
+	          test(browser);
+	          console.log(colors.green('Test Pass\u2713 : ' + test.name));
+	        }
+	      } catch (err) {
+	        _didIteratorError2 = true;
+	        _iteratorError2 = err;
+	      } finally {
+	        try {
+	          if (!_iteratorNormalCompletion2 && _iterator2['return']) {
+	            _iterator2['return']();
+	          }
+	        } finally {
+	          if (_didIteratorError2) {
+	            throw _iteratorError2;
+	          }
+	        }
+	      }
+	
+	      browser.quit();
+	      // Callback, useful for mocha
+	      if (typeof done === 'function') done();
+	    });
+	  }
+	
+	  return runIDEtests;
 	}();
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }()), __webpack_require__(1)))
 
@@ -448,6 +501,18 @@ return /******/ (function(modules) { // webpackBootstrap
 /***/ function(module, exports) {
 
 	module.exports = __WEBPACK_EXTERNAL_MODULE_10__;
+
+/***/ },
+/* 11 */
+/***/ function(module, exports) {
+
+	module.exports = __WEBPACK_EXTERNAL_MODULE_11__;
+
+/***/ },
+/* 12 */
+/***/ function(module, exports) {
+
+	module.exports = __WEBPACK_EXTERNAL_MODULE_12__;
 
 /***/ }
 /******/ ])
