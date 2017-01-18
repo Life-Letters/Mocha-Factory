@@ -1,4 +1,5 @@
 var webpack = require('webpack');
+var nodeExternals = require('webpack-node-externals');
 
 var config = {
   entry: './lib/mocha-factory.js',
@@ -13,21 +14,8 @@ var config = {
   resolve: {
     extensions: ['', '.js']
   },
-  externals: {
-    "babel-register": 'babel-register',
-    "require-hacker" : 'require-hacker',
-    "css-modules-require-hook" : 'css-modules-require-hook',
-    "node-sass" : 'node-sass',
-    "jsdom" : 'jsdom',
-    "fs" : 'fs',
-    "path" : 'path',
-    "mocha" : 'mocha',
-    "selenium-html-js-converter" : 'selenium-html-js-converter',
-    "colors" : 'colors/safe',
-    "colors/safe" : 'colors',
-    "wd-sync" : 'wd-sync',
-    "ping" : 'ping'
-  },
+  target: 'node',
+  externals: [nodeExternals()],
   module : {
     loaders : [
       {
