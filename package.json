@@ -4,7 +4,7 @@
   "description": "A Mocha Instance generator that plays well with Florey testing pipelines",
   "main": "dist/mocha-factory.js",
   "scripts": {
-    "build": "webpack",
+    "build": "webpack --optimize-minimize",
     "test": "node sample.js"
   },
   "engineStrict": true,

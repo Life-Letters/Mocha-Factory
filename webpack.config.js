@@ -14,6 +14,10 @@ var config = {
   resolve: {
     extensions: ['', '.js']
   },
+  stats: {
+    // Suppress those uglify warnings
+    warnings: false
+  },
   target: 'node',
   externals: [nodeExternals()],
   module : {
