@@ -1,7 +1,7 @@
 require('babel-register')();
 require('dotenv').config();
 
-var MochaFactory = require('./lib/mocha-factory.js');
+var MochaFactory = require('./src/mocha-factory.js');
 
 var testList = MochaFactory.convertHtmlFileToJsFile('./selenium','./selenium/export').map((f) => require(f));
 

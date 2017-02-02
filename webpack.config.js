@@ -2,7 +2,7 @@ var webpack = require('webpack');
 var nodeExternals = require('webpack-node-externals');
 
 var config = {
-  entry: './lib/mocha-factory.js',
+  entry: './src/mocha-factory.js',
   output: {
     path: 'dist',
     filename: 'mocha-factory.js',
