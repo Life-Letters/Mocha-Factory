@@ -14,12 +14,12 @@
   "author": "Patrick Lai <Patrick.lai@lifeletters.com.au>",
   "license": "MIT",
   "devDependencies": {
-    "babel-core": "^6.21.0",
+    "babel-core": "^6.22.1",
     "babel-loader": "^6.2.10",
-    "babel-preset-airbnb": "^1.0.1",
-    "babel-preset-stage-0": "^6.16.0",
+    "babel-preset-airbnb": "^1.1.1",
+    "babel-preset-stage-0": "^6.22.0",
     "babel-register": "^6.4.3",
-    "webpack": "^1.13.1",
+    "webpack": "^1.14.0",
     "webpack-node-externals": "^1.5.4"
   },
   "dependencies": {
@@ -29,8 +29,9 @@
     "jsdom": "^8.0.1",
     "mocha": "^2.4.5",
     "mocha-ci-slack-reporter": "^1.0.1",
-    "node-sass": "^3.10.0",
+    "node-sass": "^3.13.1",
     "ping": "^0.2.1",
+    "recursive-readdir": "^2.1.0",
     "require-hacker": "^2.1.4",
     "selenium-html-js-converter": "^0.4.7",
     "wd-sync": "^1.2.5"

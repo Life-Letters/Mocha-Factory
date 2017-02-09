@@ -11,7 +11,8 @@ var requireHacker = require('require-hacker'),
     Mocha = require('mocha'),
     wdSync = require('wd-sync'),
     ping = require('ping'),
-    colors = require('colors/safe');
+    colors = require('colors/safe'),
+    recursive = require('recursive-readdir');
 
 // Dont bother with Static files
 const ignoredExtensions = [
@@ -76,8 +77,8 @@ export const setup = (config) => {
 // Adds Mocha suites
 export const addFiles = (dir,ext) => {
   // Add each .js file to the mocha instance
-  fs.readdirSync(dir).filter(function(file){
-      // Only keep the .js files
+  recursive.filter(function(file){
+      // Only keep the files matching specified ext
       return file.substr(-ext.length) === ext;
   }).forEach(function(file){
       mochaInstance.addFile(path.join(dir, file));
