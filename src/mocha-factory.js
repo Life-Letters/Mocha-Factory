@@ -6,14 +6,12 @@ var requireHacker = require('require-hacker'),
     sass = require('node-sass'),
     jsdom = require('jsdom').jsdom,
     fs = require('fs'),
-    path = require('path'),
     converter = require('selenium-html-js-converter'),
     Mocha = require('mocha'),
     wdSync = require('wd-sync'),
     ping = require('ping'),
     colors = require('colors/safe'),
-    recursive = require('recursive-readdir');
-
+    recursiveReadSync = require('recursive-readdir-sync');
 // Dont bother with Static files
 const ignoredExtensions = [
   'png',
@@ -77,14 +75,22 @@ export const setup = (config) => {
 // Adds Mocha suites
 export const addFiles = (dir,ext) => {
   // Add each .js file to the mocha instance
-  recursive(dir, (err, files) => {
-    // Files is an array of filename
-    files.filter(function(file){
-      return file.substr(-ext.length) === ext;
+  try {
+    recursiveReadSync(dir).filter(function(file){
+        // Only keep the .js files
+        return file.substr(-ext.length) === ext;
     }).forEach(function(file){
-      mochaInstance.addFile(path.join(dir, file));
+        mochaInstance.addFile(file);
     });
-  });
+  } catch(err){
+
+    if(err.errno === 34) {
+      console.log('Path does not exist');
+      return;
+    }
+
+    throw err;
+  }
 };
 
 // Runs the tests
@@ -130,10 +136,10 @@ export const runIDEtests = (config, list_of_test_functions , done) =>{
   // Cheap way to check if there is even a host
   if(config.selenium_server_remote){
     ping.sys.probe(config.selenium_server_remote, function(isAlive){
-        if(!isAlive){
-          console.log(`selenium_server_remote ${config.selenium_server_remote} cannot be reached`);
-          process.exit(1);
-        }
+      if(!isAlive){
+        console.log(`selenium_server_remote ${config.selenium_server_remote} cannot be reached`);
+        process.exit(1);
+      }
     });
   }
 
