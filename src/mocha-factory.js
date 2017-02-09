@@ -77,11 +77,13 @@ export const setup = (config) => {
 // Adds Mocha suites
 export const addFiles = (dir,ext) => {
   // Add each .js file to the mocha instance
-  recursive.filter(function(file){
-      // Only keep the files matching specified ext
+  recursive(dir, (err, files) => {
+    // Files is an array of filename
+    files.filter(function(file){
       return file.substr(-ext.length) === ext;
-  }).forEach(function(file){
+    }).forEach(function(file){
       mochaInstance.addFile(path.join(dir, file));
+    });
   });
 };
 
