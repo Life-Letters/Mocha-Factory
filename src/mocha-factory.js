@@ -12,7 +12,8 @@ var requireHacker = require('require-hacker'),
     ping = require('ping'),
     colors = require('colors/safe'),
     recursiveReadSync = require('recursive-readdir-sync');
-// Dont bother with Static files
+
+// Files that we need to bypass require else enzyme won't work.
 const ignoredExtensions = [
   'png',
   'gif',
@@ -25,10 +26,12 @@ const ignoredExtensions = [
   'mp4'
 ]
 
+// Loop through the ignored file extensions and bypass requires (else breaks enzyme)
 for (var ext of ignoredExtensions){
   requireHacker.hook(ext, () => 'module.exports = ""');
 }
 
+// Pre process css with css-modules and sass so we will always get the same hash in tests
 hook({
     generateScopedName: '[name]__[local]___[hash:base64:5]',
     extensions: [ '.scss', '.css' ],
@@ -39,6 +42,9 @@ hook({
       }).css,
 });
 
+
+// Directly required by enzyme when using jsdom
+// https://github.com/airbnb/enzyme/blob/master/docs/guides/jsdom.md
 var exposedProperties = ['window', 'navigator', 'document'];
 
 global.document = jsdom('');
@@ -54,7 +60,7 @@ global.navigator = {
   userAgent: 'node.js'
 };
 
-// Might need this was in enzyme-example-mocha
+// Might need, this was in enzyme-example-mocha
 // documentRef = document;
 
 // Instantiate a Mocha instance.
@@ -63,8 +69,7 @@ var mochaInstance = new Mocha();
 // Run the tests.
 export const mocha = mochaInstance;
 
-// Basically just sets up reporter for now
-
+// Any pre-setup is done here, expected to be run
 export const setup = (config) => {
   if(!config.slackHook) return;
   // Remap the slackHook to url just made it slackHook so its more descriptive
@@ -72,7 +77,7 @@ export const setup = (config) => {
   mochaInstance.reporter('mocha-ci-slack-reporter', config);
 };
 
-// Adds Mocha suites
+// Adds Mocha suites, adds recursively subfolders too
 export const addFiles = (dir,ext) => {
   // Add each .js file to the mocha instance
   try {
@@ -102,7 +107,8 @@ export const run = () => {
   });
 };
 
-// Selenium HTML to js exporter
+// Selenium HTML to js exporter using a converter library
+// https://github.com/flyingfisher/selenium-html-js-converter
 export const convertHtmlFileToJsFile = (test_scripts_dir, exports_dir) => {
 
   // Store list of tests so we can return it;
@@ -126,7 +132,8 @@ export const convertHtmlFileToJsFile = (test_scripts_dir, exports_dir) => {
 
 };
 
-// Expect config like this
+// Runs tests created by selemium IDE.
+// Expects config like this
 // {
 //  selenium_server_remote: xxxxx
 //  browser_name: xxxxx

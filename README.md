@@ -56,3 +56,14 @@ If you have a slack URL in your env. It will post to slack else in console. If y
 ```
 sudo gem install terminal-notifier
 ```
+
+#### Supporting documentation
+
+- [Selenium IDE HTML to JS](https://github.com/flyingfisher/selenium-html-js-converter)  
+Used to help webdriver run tests directly from selenium IDE outputs (in html).
+
+- [Enzyme](https://github.com/airbnb/enzyme)  
+React testing framework
+
+- [Mocha](https://www.npmjs.com/package/mocha)  
+Very popular testing framework
