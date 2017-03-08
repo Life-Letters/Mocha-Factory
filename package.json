@@ -23,17 +23,13 @@
     "webpack-node-externals": "^1.5.4"
   },
   "dependencies": {
-    "colors": "^1.1.2",
     "css-modules-require-hook": "^4.0.5",
     "growl": "^1.9.2",
     "jsdom": "^8.0.1",
     "mocha": "^2.4.5",
     "mocha-ci-slack-reporter": "^1.0.1",
     "node-sass": "^3.13.1",
-    "ping": "^0.2.1",
     "recursive-readdir-sync": "^1.0.6",
-    "require-hacker": "^2.1.4",
-    "selenium-html-js-converter": "^0.4.7",
-    "wd-sync": "^1.2.5"
+    "require-hacker": "^2.1.4"
   }
 }
