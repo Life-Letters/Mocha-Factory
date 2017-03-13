@@ -1,13 +1,15 @@
 // Babel all our imports
 require("babel-register")();
 
-var requireHacker = require("require-hacker"),
-  hook = require("css-modules-require-hook"),
-  sass = require("node-sass"),
-  jsdom = require("jsdom").jsdom,
-  fs = require("fs"),
-  Mocha = require("mocha"),
-  recursiveReadSync = require("recursive-readdir-sync");
+const requireHacker = require("require-hacker");
+const hook = require("css-modules-require-hook");
+const sass = require("node-sass");
+const jsdom = require("jsdom").jsdom;
+const fs = require("fs");
+const Mocha = require("mocha");
+const recursiveReadSync = require("recursive-readdir-sync");
+
+const logReporter = require("./logger-reporter");
 
 // Files that we need to bypass require else enzyme won't work.
 const ignoredExtensions = [
@@ -66,8 +68,10 @@ export const mocha = mochaInstance;
 
 // Any pre-setup is done here, expected to be run
 export const setup = config => {
-  console.log("hey hey!");
-  console.log(process.env.LOGGER_URL);
+  if (!process.env.LOGGER_URL) {
+    return;
+  }
+  mochaInstance.reporter(logReporter);
 };
 
 // Adds Mocha suites, adds recursively subfolders too
