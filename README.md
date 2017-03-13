@@ -3,14 +3,15 @@
 The mocha factory does the heavy lifting of setting up the testing in the Florey pipeline.
 
 
-# Setup
+# Configuration
 
-Some environment variables are expected. Optional is marked with <OPTIONAL_...> else its required. For development make a `.env` file in root:
+If you want to send the results of the testing to the [logger-service](https://github.com/florey-health/logger-service), add the following enviroment variable:
 
 ```
-NODE_ENV="local"
-SLACK_DEVELOPMENT_HOOK_URL="<OPTIONAL_URL>"
+CI_LOGGER_URL=""
 ```
+
+Enviroment variables can be set locally using a `.env` file.
 
 
 # How to use

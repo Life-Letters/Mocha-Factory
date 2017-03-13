@@ -68,7 +68,7 @@ export const mocha = mochaInstance;
 
 // Any pre-setup is done here, expected to be run
 export const setup = config => {
-  if (!process.env.LOGGER_URL) {
+  if (!process.env.CI_LOGGER_URL) {
     return;
   }
   mochaInstance.reporter(logReporter);
