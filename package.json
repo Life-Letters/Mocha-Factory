@@ -1,8 +1,8 @@
 {
   "name": "mocha-factory",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "A Mocha Instance generator that plays well with Florey testing pipelines",
-  "main": "dist/mocha-factory.js",
+  "main": "src/mocha-factory.js",
   "scripts": {
     "build": "webpack --optimize-minimize",
     "test": "node sample.js"

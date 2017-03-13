@@ -1,59 +1,58 @@
 // Babel all our imports
-require('babel-register')();
+require("babel-register")();
 
-var requireHacker = require('require-hacker'),
-    hook = require('css-modules-require-hook'),
-    sass = require('node-sass'),
-    jsdom = require('jsdom').jsdom,
-    fs = require('fs'),
-    Mocha = require('mocha'),
-    recursiveReadSync = require('recursive-readdir-sync');
+var requireHacker = require("require-hacker"),
+  hook = require("css-modules-require-hook"),
+  sass = require("node-sass"),
+  jsdom = require("jsdom").jsdom,
+  fs = require("fs"),
+  Mocha = require("mocha"),
+  recursiveReadSync = require("recursive-readdir-sync");
 
 // Files that we need to bypass require else enzyme won't work.
 const ignoredExtensions = [
-  'png',
-  'gif',
-  'jpg',
-  'jpeg',
-  'svg',
-  'm4a',
-  'mp3',
-  'wav',
-  'mp4'
-]
+  "png",
+  "gif",
+  "jpg",
+  "jpeg",
+  "svg",
+  "m4a",
+  "mp3",
+  "wav",
+  "mp4"
+];
 
 // Loop through the ignored file extensions and bypass requires (else breaks enzyme)
-for (var ext of ignoredExtensions){
+for (var ext of ignoredExtensions) {
   requireHacker.hook(ext, () => 'module.exports = ""');
 }
 
 // Pre process css with css-modules and sass so we will always get the same hash in tests
 hook({
-    generateScopedName: '[name]__[local]___[hash:base64:5]',
-    extensions: [ '.scss', '.css' ],
-    preprocessCss: (data, filename) =>
-      sass.renderSync({
-        data,
-        file: filename,
-      }).css,
+  generateScopedName: "[name]__[local]___[hash:base64:5]",
+  extensions: [".scss", ".css"],
+  preprocessCss: (data, filename) =>
+    sass.renderSync({
+      data,
+      file: filename
+    }).css
 });
-
 
 // Directly required by enzyme when using jsdom
 // https://github.com/airbnb/enzyme/blob/master/docs/guides/jsdom.md
-var exposedProperties = ['window', 'navigator', 'document'];
+var exposedProperties = ["window", "navigator", "document"];
 
-global.document = jsdom('');
+global.document = jsdom("");
 global.window = document.defaultView;
-Object.keys(document.defaultView).forEach((property) => {
-  if (typeof global[property] === 'undefined') {
+Object.keys(document.defaultView).forEach(property => {
+  if (typeof global[property] === "undefined") {
     exposedProperties.push(property);
     global[property] = document.defaultView[property];
   }
 });
 
 global.navigator = {
-  userAgent: 'node.js'
+  userAgent: "node.js"
 };
 
 // Might need, this was in enzyme-example-mocha
@@ -66,27 +65,26 @@ var mochaInstance = new Mocha();
 export const mocha = mochaInstance;
 
 // Any pre-setup is done here, expected to be run
-export const setup = (config) => {
-  if(!config.slackHook) return;
-  // Remap the slackHook to url just made it slackHook so its more descriptive
-  config.url = config.slackHook;
-  mochaInstance.reporter('mocha-ci-slack-reporter', config);
+export const setup = config => {
+  console.log("hey hey!");
+  console.log(process.env.LOGGER_URL);
 };
 
 // Adds Mocha suites, adds recursively subfolders too
-export const addFiles = (dir,ext) => {
+export const addFiles = (dir, ext) => {
   // Add each .js file to the mocha instance
   try {
-    recursiveReadSync(dir).filter(function(file){
+    recursiveReadSync(dir)
+      .filter(function(file) {
         // Only keep the .js files
         return file.substr(-ext.length) === ext;
-    }).forEach(function(file){
+      })
+      .forEach(function(file) {
         mochaInstance.addFile(file);
-    });
-  } catch(err){
-
-    if(err.errno === 34) {
-      console.log('Path does not exist');
+      });
+  } catch (err) {
+    if (err.errno === 34) {
+      console.log("Path does not exist");
       return;
     }
 
@@ -96,9 +94,9 @@ export const addFiles = (dir,ext) => {
 
 // Runs the tests
 export const run = () => {
-  mochaInstance.growl().run(function(failures){
-    process.on('exit', function () {
-      process.exit(failures);  // exit with non-zero status if there were failures
+  mochaInstance.growl().run(function(failures) {
+    process.on("exit", function() {
+      process.exit(failures); // exit with non-zero status if there were failures
     });
   });
 };
