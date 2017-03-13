@@ -1,21 +1,19 @@
-# Mocha Factory
+# Overview
 
-#### What is this?
+The mocha factory does the heavy lifting of setting up the testing in the Florey pipeline.
 
-A module that builds a Mocha instance for running tests in Florey pipeline. Gives you Slack notifications and gets you ready for testing with Enzyme.
 
-Please refer to the [example project]() to see how to use this.
+# Setup
 
-#### Setup
-
-Some environment variables are expected. Optional is marked with <OPTIONAL_...> else its required. For development make a '.env' file in root:
+Some environment variables are expected. Optional is marked with <OPTIONAL_...> else its required. For development make a `.env` file in root:
 
 ```
-  NODE_ENV="local"
-  SLACK_DEVELOPMENT_HOOK_URL="<OPTIONAL_URL>"
+NODE_ENV="local"
+SLACK_DEVELOPMENT_HOOK_URL="<OPTIONAL_URL>"
 ```
 
-#### How to use
+
+# How to use
 
 The Factory exposes these methods/objects;
 
@@ -50,14 +48,8 @@ MochaFactory.runIDEtests({
 }, testList, done);
 ```
 
-#### Notifications
-If you have a slack URL in your env. It will post to slack else in console. If you fancy OSX notifications you can install the terminal notifier:
 
-```
-sudo gem install terminal-notifier
-```
-
-#### Supporting documentation
+# Helpful information
 
 - [Selenium IDE HTML to JS](https://github.com/flyingfisher/selenium-html-js-converter)  
 Used to help webdriver run tests directly from selenium IDE outputs (in html).
