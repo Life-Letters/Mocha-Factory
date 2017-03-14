@@ -1,6 +1,6 @@
 {
   "name": "mocha-factory",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "A Mocha Instance generator that plays well with Florey testing pipelines",
   "main": "src/mocha-factory.js",
   "scripts": {

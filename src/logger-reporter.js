@@ -9,6 +9,8 @@ const logger = require('logger-client')({
   appVersion: process.env.npm_package_version,
 });
 
+// logger.info('starting test');
+
 function JLReporter(runner) {
   mocha.reporters.Base.call(this, runner);
 
@@ -17,16 +19,16 @@ function JLReporter(runner) {
 
   runner.on('pass', function(test){
     passes++;
-    logger.info('pass: '+test.fullTitle());
+    // logger.info('pass: '+test.fullTitle());
   });
 
   runner.on('fail', function(test, err){
     failures++;
-    logger.warn('fail: '+test.fullTitle()+' ('+err.message+')');
+    logger.error('fail: '+test.fullTitle()+' ('+err.message+')');
   });
 
   runner.on('end', function(){
-    logger.info('end: '+passes+'/'+(passes+failures));
+    // logger.info('end: '+passes+'/'+(passes+failures));
     process.exit(failures);
   });
 }
