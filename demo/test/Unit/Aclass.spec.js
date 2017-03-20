@@ -3,7 +3,7 @@ import { expect } from 'chai';
 
 const A = new Aclass();
 
-describe("Testing class A", function() {
+describe("Unit Tests - class A", function() {
 
   // I had slow internet
   this.timeout(10000);

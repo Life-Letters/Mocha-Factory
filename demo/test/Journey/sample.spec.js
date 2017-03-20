@@ -21,7 +21,7 @@ var appleWindow = new webdriver.Builder()
     .build();
 
 // Write the tests
-describe("Testing Google and Apple", function() {
+describe("Journey Tests - Google and Apple", function() {
 
   // UI tests are slow especially with this internet
   this.timeout(10000);

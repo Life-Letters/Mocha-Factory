@@ -17,7 +17,7 @@ const makeMounted = () => mount(<Foo />)
 
 // Test suite
 // Don't use es6 Arrow functions because it has some scoping confusion (with 'this')
-describe("Testing Component", function() {
+describe("Unit Tests - Component", function() {
 
   it("Contains an element with class 'foo' - find elements", function() {
     expect(makeShallow().is(`.${styles.foo}`)).to.equal(true);

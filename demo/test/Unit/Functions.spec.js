@@ -1,7 +1,7 @@
 import * as F from '../../src/Functions';
 import { expect } from 'chai';
 
-describe("Testing Functions", function() {
+describe("Unit Tests - Functions", function() {
   it("Adding 1 to 1 yields 2", function() {
     expect(F.addOne(1)).to.equal(2);
   });
