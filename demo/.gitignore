@@ -1,0 +1,17 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+
+# Dependency directory
+node_modules
+
+# screenshots form tests and exports from test
+screenshots
+test/Journey/Export
+
+# .env
+.env
+
+# Build
+public/build
