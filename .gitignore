@@ -9,6 +9,9 @@ node_modules
 #.env
 .env
 
+#dist
+dist
+
 # Demo
 demo/.env
 demo/node_modules

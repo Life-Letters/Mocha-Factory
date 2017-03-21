@@ -4,23 +4,20 @@
   "description": "A Mocha Instance generator that plays well with Florey testing pipelines",
   "main": "src/mocha-factory.js",
   "scripts": {
-    "build": "webpack --optimize-minimize",
     "test": "node sample.js"
   },
   "engineStrict": true,
   "engines": {
-    "node": ">=7.3.0"
+    "node": "6.9.5"
   },
-  "devDependencies": {
-    "babel-core": "~6.22.1",
-    "babel-loader": "~6.2.10",
-    "babel-preset-airbnb": "~1.1.1",
-    "babel-preset-stage-0": "~6.22.0",
-    "babel-register": "~6.4.3",
-    "webpack": "~1.14.0",
-    "webpack-node-externals": "~1.5.4"
-  },
+  "files": [
+    "src"
+  ],
   "dependencies": {
+    "babel-plugin-webpack-alias": "^2.1.2",
+    "babel-preset-airbnb": "~1.1.1",
+    "babel-preset-stage-2": "~6.22.0",
+    "babel-register": "~6.4.3",
     "css-modules-require-hook": "~4.0.5",
     "fs": "0.0.1-security",
     "growl": "~1.9.2",

@@ -1,15 +1,14 @@
 // Babel all our imports
 require("babel-register")();
 
-const requireHacker = require("require-hacker");
-const hook = require("css-modules-require-hook");
-const sass = require("node-sass");
-const jsdom = require("jsdom").jsdom;
-const fs = require("fs");
-const Mocha = require("mocha");
-const recursiveReadSync = require("recursive-readdir-sync");
-
-const logReporter = require("./logger-reporter");
+const requireHacker       = require("require-hacker");
+const cssHook             = require("css-modules-require-hook");
+const sass                = require("node-sass");
+const jsdom               = require("jsdom").jsdom;
+const fs                  = require("fs");
+const Mocha               = require("mocha");
+const recursiveReadSync   = require("recursive-readdir-sync");
+const logReporter         = require("./logger-reporter");
 
 // Files that we need to bypass require else enzyme won't work.
 const ignoredExtensions = [
@@ -26,11 +25,11 @@ const ignoredExtensions = [
 
 // Loop through the ignored file extensions and bypass requires (else breaks enzyme)
 for (var ext of ignoredExtensions) {
-  requireHacker.hook(ext, () => 'module.exports = ""');
+  requireHacker.cssHook(ext, () => 'module.exports = ""');
 }
 
 // Pre process css with css-modules and sass so we will always get the same hash in tests
-hook({
+cssHook({
   generateScopedName: "[name]__[local]___[hash:base64:5]",
   extensions: [".scss", ".css"],
   preprocessCss: (data, filename) =>
@@ -61,9 +60,9 @@ global.navigator = {
 // documentRef = document;
 
 // Instantiate a Mocha instance.
-var mochaInstance = new Mocha();
+const mochaInstance = new Mocha();
 
-// Run the tests.
+// Expose Mocha Instance
 export const mocha = mochaInstance;
 
 // Any pre-setup is done here, expected to be run
