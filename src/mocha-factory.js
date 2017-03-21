@@ -25,7 +25,7 @@ const ignoredExtensions = [
 
 // Loop through the ignored file extensions and bypass requires (else breaks enzyme)
 for (var ext of ignoredExtensions) {
-  requireHacker.cssHook(ext, () => 'module.exports = ""');
+  requireHacker.hook(ext, () => 'module.exports = ""');
 }
 
 // Pre process css with css-modules and sass so we will always get the same hash in tests
