@@ -1,6 +1,3 @@
-// Babel all our imports
-require("babel-register")();
-
 const requireHacker       = require("require-hacker");
 const cssHook             = require("css-modules-require-hook");
 const sass                = require("node-sass");
