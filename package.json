@@ -27,6 +27,10 @@
     "mocha-ci-slack-reporter": "~1.0.1",
     "node-sass": "~3.13.1",
     "path": "~0.12.7",
-    "recursive-readdir-sync": "~1.0.6"
+    "recursive-readdir-sync": "~1.0.6",
+    "require-hacker": "~2.1.4"
+  },
+  "devDependencies": {
+    "node-sass-tilde-importer": "0.0.4"
   }
 }

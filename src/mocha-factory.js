@@ -1,6 +1,7 @@
 const requireHacker       = require("require-hacker");
 const cssHook             = require("css-modules-require-hook");
 const sass                = require("node-sass");
+const tildeImporter       = require('node-sass-tilde-importer');
 const jsdom               = require("jsdom").jsdom;
 const fs                  = require("fs");
 const Mocha               = require("mocha");
@@ -32,7 +33,8 @@ cssHook({
   preprocessCss: (data, filename) =>
     sass.renderSync({
       data,
-      file: filename
+      file: filename,
+      importer: tildeImporter // Finds nearest node_modules for '~' imports, which webpack allows
     }).css
 });
 
