@@ -3,15 +3,11 @@ require('dotenv').config();
 // Babel mocha-factory
 require('babel-register')({ ignore: /node_modules\/(?!mocha-factory)/ });
 
-var server = require('../server.js');
-var MochaFactory = require('mocha-factory');
+// You will require mocha-factory as an import normally
+var MochaFactory = require('../../src/mocha-factory.js');
 
-MochaFactory.setup({
-  testTitle : `${process.env.npm_package_name} - Unit tests - ${process.env.NODE_ENV}`,
-  slackHook : process.env.SLACK_DEVELOPMENT_HOOK_URL,
-  username: 'Florey',
-  channel: '#deployment'
-});
+// Pick your logger service, undefined goes to console
+MochaFactory.setup({ CI_LOGGER_URL: process.env.CI_LOGGER_URL });
 
 // Let tests to be added as args so its easier to control / more native Mocha-ish
 // Usage in CLI: node test/mochaFactory.js ./test/Unit ./test/Journey etc...
@@ -22,8 +18,3 @@ suites.map(testPath => MochaFactory.addFiles(testPath, '.spec.js'));
 
 // Run the mocha test
 MochaFactory.run();
-
-// Gotta close the server
-MochaFactory.mocha.suite.afterAll( function() {
-  server.close();
-});

@@ -7,17 +7,19 @@ var By = webdriver.By,
 
 // Use environcment vars to change browser and remote
 // Undefined SELENIUM_SERVER_REMOTE will default to your local PC
-// Undefined Browser will probably crash
+// Undefined Browser will default to phantomjs
+const browser = process.env.SELENIUM_BROWSER || 'phantomjs';
+const seleniumRemote = process.env.SELENIUM_SERVER_REMOTE;
 
 var googleWindow = new webdriver.Builder()
-    .forBrowser(process.env.SELENIUM_BROWSER)
-    .usingServer(process.env.SELENIUM_SERVER_REMOTE)
+    .forBrowser(browser)
+    .usingServer(seleniumRemote)
     .build();
 
 // Just to demonstrate multi drivers
 var appleWindow = new webdriver.Builder()
-    .forBrowser(process.env.SELENIUM_BROWSER)
-    .usingServer(process.env.SELENIUM_SERVER_REMOTE)
+    .forBrowser(browser)
+    .usingServer(seleniumRemote)
     .build();
 
 // Write the tests

@@ -1,8 +1,8 @@
 // A dumb component
+import loadingImage from './assets/loading.gif';
 
 const React = require('react');
 
-const GIPHY_LOADING_URL = `/assets/loading.gif`;
 const styles = {
   minHeight: '310px',
   marginTop: '1em'
@@ -10,11 +10,11 @@ const styles = {
 
 class ImageDisplay extends React.Component {
   giphySourceUrl= () => {
-    return this.props.sourceUrl || GIPHY_LOADING_URL;
+    return this.props.sourceUrl || loadingImage;
   }
 
   render () {
-    const url = this.props.loading ? GIPHY_LOADING_URL : this.props.url;
+    const url = this.props.loading ? loadingImage : this.props.url;
     const width = this.props.width || 200;
     return (
       <div style={styles}>
