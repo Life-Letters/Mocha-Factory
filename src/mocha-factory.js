@@ -1,24 +1,24 @@
-const requireHacker       = require("require-hacker");
-const cssHook             = require("css-modules-require-hook");
-const sass                = require("node-sass");
-const tildeImporter       = require('node-sass-tilde-importer');
-const jsdom               = require("jsdom").jsdom;
-const fs                  = require("fs");
-const Mocha               = require("mocha");
-const recursiveReadSync   = require("recursive-readdir-sync");
-const logReporter         = require("./logger-reporter");
+const requireHacker = require('require-hacker');
+const cssHook = require('css-modules-require-hook');
+const sass = require('node-sass');
+const tildeImporter = require('node-sass-tilde-importer');
+const jsdom = require('jsdom').jsdom;
+const fs = require('fs');
+const Mocha = require('mocha');
+const recursiveReadSync = require('recursive-readdir-sync');
+const logReporter = require('./logger-reporter');
 
 // Files that we need to bypass require else enzyme won't work.
 const ignoredExtensions = [
-  "png",
-  "gif",
-  "jpg",
-  "jpeg",
-  "svg",
-  "m4a",
-  "mp3",
-  "wav",
-  "mp4"
+  'png',
+  'gif',
+  'jpg',
+  'jpeg',
+  'svg',
+  'm4a',
+  'mp3',
+  'wav',
+  'mp4'
 ];
 
 // Loop through the ignored file extensions and bypass requires (else breaks enzyme)
@@ -28,8 +28,8 @@ for (var ext of ignoredExtensions) {
 
 // Pre process css with css-modules and sass so we will always get the same hash in tests
 cssHook({
-  generateScopedName: "[name]__[local]___[hash:base64:5]",
-  extensions: [".scss", ".css"],
+  generateScopedName: '[name]__[local]___[hash:base64:5]',
+  extensions: ['.scss', '.css'],
   preprocessCss: (data, filename) =>
     sass.renderSync({
       data,
@@ -40,19 +40,19 @@ cssHook({
 
 // Directly required by enzyme when using jsdom
 // https://github.com/airbnb/enzyme/blob/master/docs/guides/jsdom.md
-var exposedProperties = ["window", "navigator", "document"];
+var exposedProperties = ['window', 'navigator', 'document'];
 
-global.document = jsdom("");
+global.document = jsdom('');
 global.window = document.defaultView;
 Object.keys(document.defaultView).forEach(property => {
-  if (typeof global[property] === "undefined") {
+  if (typeof global[property] === 'undefined') {
     exposedProperties.push(property);
     global[property] = document.defaultView[property];
   }
 });
 
 global.navigator = {
-  userAgent: "node.js"
+  userAgent: 'node.js'
 };
 
 // Might need, this was in enzyme-example-mocha
@@ -86,7 +86,7 @@ export const addFiles = (dir, ext) => {
       });
   } catch (err) {
     if (err.errno === 34) {
-      console.log("Path does not exist");
+      console.log('Path does not exist');
       return;
     }
 
@@ -97,7 +97,7 @@ export const addFiles = (dir, ext) => {
 // Runs the tests
 export const run = () => {
   mochaInstance.growl().run(function(failures) {
-    process.on("exit", function() {
+    process.on('exit', function() {
       process.exit(failures); // exit with non-zero status if there were failures
     });
   });

@@ -6,7 +6,7 @@ const mocha = require('mocha');
 const logger = require('logger-client')({
   loggerUrl: process.env.CI_LOGGER_URL,
   appName: process.env.npm_package_name,
-  appVersion: process.env.npm_package_version,
+  appVersion: process.env.npm_package_version
 });
 
 // logger.info('starting test');
@@ -17,17 +17,17 @@ function JLReporter(runner) {
   var passes = 0;
   var failures = 0;
 
-  runner.on('pass', function(test){
+  runner.on('pass', function(test) {
     passes++;
     // logger.info('pass: '+test.fullTitle());
   });
 
-  runner.on('fail', function(test, err){
+  runner.on('fail', function(test, err) {
     failures++;
-    logger.error('fail: '+test.fullTitle()+' ('+err.message+')');
+    logger.error('fail: ' + test.fullTitle() + ' (' + err.message + ')');
   });
 
-  runner.on('end', function(){
+  runner.on('end', function() {
     // logger.info('end: '+passes+'/'+(passes+failures));
     process.exit(failures);
   });
