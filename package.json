@@ -10,11 +10,9 @@
   "engines": {
     "node": "6.9.5"
   },
-  "files": [
-    "src"
-  ],
+  "files": ["src"],
   "dependencies": {
-    "babel-plugin-webpack-alias": "^2.1.2",
+    "babel-plugin-webpack-alias": "~2.1.2",
     "babel": "6.5.2",
     "babel-eslint": "~7.2.1",
     "babel-preset-airbnb": "~2.2.3",
