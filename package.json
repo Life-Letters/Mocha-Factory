@@ -28,6 +28,6 @@
     "require-hacker": "~2.1.4"
   },
   "devDependencies": {
-    "git-hooks": "github:florey-health/git-hooks"
+    "git-hooks": "github:florey-health/git-hooks#1.0.0"
   }
 }
